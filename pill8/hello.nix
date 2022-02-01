@@ -1,9 +1,7 @@
-with (import <nixpkgs> {});
-derivation {
+let
+  pkgs = import <nixpkgs> {};
+  mkDerivation = import ./autotools.nix pkgs;
+in mkDerivation {
   name = "hello";
-  builder = "${bash}/bin/bash";
-  args = [ ./builder.sh ];
-  buildInputs = [ gnutar gzip gnumake clang clang.bintools.bintools_bin coreutils gawk gnused gnugrep ];
   src = ./hello-2.10.tar.gz;
-  system = builtins.currentSystem;
 }
